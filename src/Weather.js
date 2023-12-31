@@ -3,13 +3,13 @@ import "./Weather.css";
 
 export default function Weather() {
   let weatherData = {
-    city: "New York",
-    temperature: 19,
+    city: "Houston",
+    temperature: 36,
     date: "Tuesday 10:00",
     description: "Cloudy",
     imgUrl: "https://ssl.gstatic.com/onebox/weather/64/sunny.png",
-    humidity: 80,
-    wind: 10
+    humidity: 100,
+    wind: 40
   };
 
   return (
