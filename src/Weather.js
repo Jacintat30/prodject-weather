@@ -1,18 +1,56 @@
 import React from "react";
 import "./Weather.css";
+import axios from "axios";
+import FormattedDate from "./FormattedDate";
 
+<<<<<<< HEAD
+export default function Weather(props) {
+  const [weatherData, setWeatherData] = useState({ready:false });
+  const [city, setCity ] = useState(props.defaultCity);
+  function handleResponse(respone) {
+    setWeatherData({ 
+      ready: true,
+      temperature: respone.data.main.temp,
+      humidity: respone.data.main.humidity,
+      date: new Date(respone.data.dt * 1000),
+      description: respone.data.weather[0].description,
+      imgUrl: "https://ssl.gstatic.com/onebox/weather/64/sunny.png",
+      wind: response.data.wind.speed,
+      city: respone.data.name
+=======
 export default function Weather() {
   let weatherData = {
-    city: "New York",
-    temperature: 19,
+    city: "Houston",
+    temperature: 36,
     date: "Tuesday 10:00",
     description: "Cloudy",
     imgUrl: "https://ssl.gstatic.com/onebox/weather/64/sunny.png",
-    humidity: 80,
-    wind: 10
+    humidity: 100,
+    wind: 40
   };
+>>>>>>> a5115114bcb6bcf04343256ea42ff11dd61f2f17
 
-  return (
+    });
+  }
+
+  function search() {
+    const apiKey = "bc2cd97eaa209e7d22d8f3c84081655f";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?
+    g=${city}&appid=${APIkey}&units=metric`;
+    axios.get(apiUrl).yhen(handleResponse);
+  }
+
+  function handleSubmit(event) {
+    event.preventdefeault();
+    search();
+  }
+
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  } 
+ 
+  if (weatherData.ready) {
+    return (
     <div className="Weather">
       <form className="mb-3">
         <div className="row">
@@ -21,7 +59,7 @@ export default function Weather() {
               type="search"
               placeholder="Type a city.."
               className="form-control"
-              autoComplete="off"
+              autoComplete="on"
             />
           </div>
           <div className="col-3">
@@ -33,37 +71,14 @@ export default function Weather() {
           </div>
         </div>
       </form>
-      <div className="overview">
-        <h1>{weatherData.city}</h1>
-        <ul>
-          <li>Last updated: {weatherData.date}</li>
-          <li>{weatherData.description}</li>
-        </ul>
+      <WeatherInfo data={weatherData} />
       </div>
-      <div className="row">
-        <div className="col-6">
-          <div className="clearfix weather-temperature">
-            <img
-              src={weatherData.imgUrl}
-              alt={weatherData.description}
-              className="float-left"
-            />
-            <div className="float-left">
-              <strong>{weatherData.temperature}</strong>
-              <span className="units">
-                <a href="/">°C</a> | <a href="/">°F</a>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="col-6">
-          <ul>
-            <li>Humidity: {weatherData.humidity}%</li>
-            <li>Wind: {weatherData.wind} km/h</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
+    );
+  } else {
+    search();
+    return "Searching..."
+  }
 }
+  
+
 
