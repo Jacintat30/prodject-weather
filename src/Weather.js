@@ -1,37 +1,26 @@
-import React from "react";
-import "./Weather.css";
+import React, { useState } from "react";
+import WeatherInfo from "./WeatherInfo";
+import WeatherForecast from "./WeatherForecast";
 import axios from "axios";
-import FormattedDate from "./FormattedDate";
-
-<<<<<<< HEAD
+import "./Weather.css";
 export default function Weather(props) {
-  const [weatherData, setWeatherData] = useState({ready:false });
-  const [city, setCity ] = useState(props.defaultCity);
-  function handleResponse(respone) {
-    setWeatherData({ 
-      ready: true,
-      temperature: respone.data.main.temp,
-      humidity: respone.data.main.humidity,
-      date: new Date(respone.data.dt * 1000),
-      description: respone.data.weather[0].description,
-      imgUrl: "https://ssl.gstatic.com/onebox/weather/64/sunny.png",
-      wind: response.data.wind.speed,
-      city: respone.data.name
-=======
-export default function Weather() {
-  let weatherData = {
-    city: "Houston",
-    temperature: 36,
-    date: "Tuesday 10:00",
-    description: "Cloudy",
-    imgUrl: "https://ssl.gstatic.com/onebox/weather/64/sunny.png",
-    humidity: 100,
-    wind: 40
-  };
->>>>>>> a5115114bcb6bcf04343256ea42ff11dd61f2f17
+  const [weatherData, setWeatherData] = useState({ ready: false });
+  const [city, setCity] = useState(props.defaultCity);
 
+  function handleResponse(response) {
+    setWeatherData({
+      ready: true,
+      coordinates: response.data.coord,
+      temperature: response.data.main.temp,
+      humidity: response.data.main.humidity,
+      date: new Date(response.data.dt * 1000),
+      description: response.data.weather[0].description,
+      icon: response.data.weather[0].icon,
+      wind: response.data.wind.speed,
+      city: response.data.name,
     });
   }
+
 
   function search() {
     const apiKey = "bc2cd97eaa209e7d22d8f3c84081655f";
