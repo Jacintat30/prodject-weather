@@ -14,10 +14,11 @@ export default function App() {
             <a
           href="https://github.com/Jacintat30/prodject-weather/tree/master/src"
           target="-blank"
-        ></a>
-           < open-sourced on GitHub></open-sourced>
+        >
+          open-sourced on GitHub
+        </a>
           and{" "}
-         <a>
+         <a href="/">
             hosted on Netlify
           </a>
         </footer>
